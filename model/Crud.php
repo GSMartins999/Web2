@@ -11,9 +11,9 @@ class crud
     {
       $conexao = Transaction::get();
       if($condicao) {
-          $sql = "SELECT $campos FROM $this->tabela";
+          $sql = "SELECT $campos FROM $this->times";
       } else{
-          $sql = "SELECT $campos FROM $this-> tabela WHERE $condicao";
+          $sql = "SELECT $campos FROM $this-> times WHERE $condicao";
     
     }
     $resultado = $conexao->query($sql);

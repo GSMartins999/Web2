@@ -16,11 +16,12 @@ class Form
     if (isset($_POST['times']) && isset($_POST['titulos']) && isset($_POST['estado'])){
       try{
         $conexao = Transaction::get();
-        $tabela = new Crud('tabela');
-        $times = $conexao->quote($_POST['times']);
-        $estado = $conexao->quote($_POST['estado']);
+        $times = new Crud('times');
+        $nome = $conexao->quote($_POST['nome']);
         $titulos = $conexao->quote($_POST['titulos']);
-        $resultado = $tabela->insert("times,titulos,estado", "$times,$titulos,$estado");
+        $estado = $conexao->quote($_POST['estado']);
+        $resultado = $times->insert("nome,titulos,estado", "$nome,$titulos,$estado");
+        Transaction::close();
       } catch (Exception $e) {
         echo $e->getMessage();
       }

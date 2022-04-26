@@ -11,6 +11,29 @@ class Template
   {
     $this->valores[$chave] = $valor;
   }
+  private function trecho($saida, $chave, $valor)
+  {
+    // Geral
+    $inicioGeral = strstr($saida, "{{$chave}}", TRUE);
+    $fimGeral = strstr($saida, "{/{$chave}}");
+    $fimGeral = str_replace("{/{$chave}}", "", $fimGeral);
+    // Trecho
+    $inicioTrecho = strstr($saida, "{{$chave}}");
+    $pedaco = strstr($inicioTrecho, "{/{$chave}}", TRUE);
+    $pedaco = str_replace("{{$chave}}", "", $pedaco);
+    // Substituir
+    $saidaTrecho = "";
+    foreach ($valor as $indiceFora => $valorFora) {
+      $pedacoTrecho = $pedaco;
+      foreach ($valorFora as $indiceDentro => $valorDentro) {
+        $tag = "{{$indiceDentro}}";
+        $pedacoTrecho = str_replace($tag, $valorDentro, $pedacoTrecho);
+      }
+      $saidaTrecho .= $pedacoTrecho;
+    }
+    $saida = $inicioGeral . $saidaTrecho . $fimGeral;
+    return $saida;
+  }
   public function saida()
   {
     if (!file_exists($this->arquivo)) {
