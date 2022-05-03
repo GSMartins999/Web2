@@ -42,9 +42,15 @@ class Template
       $saida = file_get_contents($this->arquivo);
       if (count($this->valores) > 0) {
         foreach ($this->valores as $chave => $valor) {
-          $tag = "{{$chave}}";
-          $saida = str_replace($tag, $valor, $saida);
-        }
+          if (is_array($valor)) {
+            $saida = $this->trecho($saida, $chave, $valor);
+          } else {
+            $tag = "{{$chave}}";
+            $saida = str_replace($tag, $valor, $saida);
+          }
+        }       
+              
+
       }
       return $saida;
     }

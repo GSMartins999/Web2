@@ -1,15 +1,16 @@
 <form method="POST" action="?class=Form&&method=salvar">
+    <input type="hidden" name="id" value="{id}"/>
     <div>
       <label for="nomes">Nomes: </label>
-      <input type="text" name="nomes" id="nomes" required />
+      <input type="text" name="nomes" id="nomes" required value="{nome}" />
     </div>
     <div>
         <label for="titulos">Titulos: </label>
-        <input type="text" name="titulos" id="titulos" required />
+        <input type="text" name="titulos" id="titulos" required value={titulos} />
     </div>
     <div>
         <label for="estado">Estado: </label>
-        <input type="text" name="estado" id="estado" required />
+        <input type="text" name="estado" id="estado" required value ="{estado}" />
     </div>
     <div> 
         <button type="submit">Salvar</button>
