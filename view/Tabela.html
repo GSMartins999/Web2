@@ -16,10 +16,12 @@
         <td>{estado}</td>
         <td>
           <button type="button"
+          class="editar"
           onclick="location.href='?class=Form&method=editar&id={id}'">Editar</button>
         </td>
         <td>
           <button type="button"
+          class="remover"
           onclick="if(confirm('Deseja realmente remover?'))
           location.href= '?class=Tabela&method=remover&id={id}'">Remover</button>
         </td>

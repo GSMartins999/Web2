@@ -9,9 +9,9 @@ class Form
   public function controller()
   {
     $form = new Template("view/form.html");
-    $form->set("id" , "");
-    $form->set("nomes" , "");
-    $form->set("titulos" , "");
+    $form->set("id", "");
+    $form->set("nome", "");
+    $form->set("titulos", "");
     $form->set("estado" , "");
     $this->message = $form->saida();
   }
@@ -28,7 +28,7 @@ class Form
           $times->insert("nome,titulos,estado", "$nomes, $titulos, $estado");
         }else{
           $id = $conexao->quote($_POST['id']);
-          $times->update("nome=$nome, titulos=$titulos, estado=$estado", "id=$id");
+          $times->update("nome=$nomes, titulos=$titulos, estado=$estado", "id=$id");
         }
       } catch (Exception $e) {
         echo $e->getMessage();
