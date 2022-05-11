@@ -2,48 +2,49 @@
 class Tabela
 {
   private $message = "";
+  private $error = "";
   public function __construct()
   {
     Transaction::open();
   }
   public function controller()
   {
-    try{
-    Transaction::get();
-    $times = new Crud("times");
-    $resultado = $times->select();
-    $tabela = new Template("view/Tabela.html");
-    if (is_array($resultado)){
-      $tabela->set("linha", $resultado);
-      $this->message = $tabela->saida();
-    } else{
-      $this->message = $times->getMessage();
-      $this->error = $times->getError();
+    try {
+      Transaction::get();
+      $times = new Crud("times");
+      $resultado = $times->select();
+      $tabela = new Template("view/tabela.html");
+      if (is_array($resultado)) {
+        $tabela->set("linha", $resultado);
+        $this->message = $tabela->saida();
+      } else {
+        $this->message = $times->getMessage();
+        $this->error = $times->getError();
+      }
+    } catch (Exception $e) {
+      $this->message = $e->getMessage();
+      $this->error = true;
     }
-  } catch (Exception $e) {
-    $this->message = $times->getMessage();
-    $this->error = true;
   }
-}
   public function remover()
   {
     if (isset($_GET["id"])) {
       try {
         $conexao = Transaction::get();
         $id = $conexao->quote($_GET["id"]);
-        $times = new Crud('times');
+        $times = new Crud("times");
         $times->delete("id=$id");
         $this->message = $times->getMessage();
-        $this->error = $computador->getError();
+        $this->error = $times->getError();
       } catch (Exception $e) {
-        $this->message = $times->getMessage();
+        $this->message = $e->getMessage();
         $this->error = true;
+      }
+    } else {
+      $this->message = "Faltando parâmetro!";
+      $this->error = true;
     }
-  } else {
-    $this->message = "Faltando parâmetro!";
-    $this->error = true;
   }
-}
   public function getMessage()
   {
     if (is_string($this->error)) {
