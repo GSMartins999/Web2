@@ -49,8 +49,6 @@ class Template
             $saida = str_replace($tag, $valor, $saida);
           }
         }       
-              
-
       }
       return $saida;
     }

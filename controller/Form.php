@@ -31,7 +31,7 @@ class Form
           $id = $conexao->quote($_POST['id']);
           $times->update("nome=$nomes, titulos=$titulos, estado=$estado", "id=$id");
         }
-        $this->message = $times>getMessage();
+        $this->message = $times->getMessage();
         $this->error = $times->getError();
       } catch (Exception $e) {
         $this->message = $e->getMessage();
